@@ -1,6 +1,14 @@
 {
   "version": "0.2.0",
-  "configurations": [
+  "configurations": [{
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "pwa-node"
+    },
     // To debug, make sure a *.spec.ts file is active in the editor, then run a configuration
     {
       "type": "node",
@@ -25,5 +33,6 @@
       "outputCapture": "std",
       "skipFiles": ["<node_internals>/**/*.js"]
       // "smartStep": true
-    }]
+    }
+  ]
 }

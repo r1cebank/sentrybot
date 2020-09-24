@@ -9,6 +9,7 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
+    "dev": "ts-node src/index.ts",
     "build": "run-p build:*",
     "build:main": "tsc -p tsconfig.json",
     "build:module": "tsc -p tsconfig.module.json",
@@ -42,11 +43,24 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@bitauth/libauth": "^1.17.1"
+    "bottleneck": "^2.19.5",
+    "config": "^3.3.1",
+    "lowdb": "^1.0.0",
+    "mkdirp": "^1.0.4",
+    "pino": "^6.6.1",
+    "pino-pretty": "^4.2.1",
+    "telegraf": "^3.38.0",
+    "telegraf-inline-menu": "^5.1.0",
+    "telegraf-session-local": "^2.0.0",
+    "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/config": "0.0.36",
+    "@types/lowdb": "^1.0.9",
+    "@types/mkdirp": "^1.0.1",
+    "@types/pino": "^6.3.1",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "ava": "^3.12.1",

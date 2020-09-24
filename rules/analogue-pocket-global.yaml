@@ -1,0 +1,14 @@
+name: Analogue Pocket (Global)
+id: analogue_pocket_global
+type: website
+url: https://www.analogue.co/store#pocket
+waitFor:
+  - type: selector
+    selector: "#Main h5:first"
+    condition: equal
+    value: Analogue Pocket — Systems
+checkFor:
+  - type: selector
+    selector: "#Main div[class^=card_card]:contains('Analogue Pocket - Black') button:first"
+    condition: notEqual
+    value: out of stock
