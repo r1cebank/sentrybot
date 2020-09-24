@@ -14,7 +14,7 @@ export enum ConditionType {
 
 export type Condition = {
   readonly condition: ConditionType;
-  readonly value: string;
+  readonly value?: string;
 };
 
 export type WebsiteRule = {

@@ -17,6 +17,7 @@
     "globby",
     "libauth",
     "mkdir",
+    "middlewares",
     "pino",
     "prettierignore",
     "sandboxed",

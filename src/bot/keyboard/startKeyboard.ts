@@ -6,8 +6,8 @@ import { DBSchema } from '../../db';
 import { RuleMap } from '../../rules';
 
 export const startKeyboard = Markup.keyboard([
-  ['🖥 Select notification', '🗒 Check current selection'],
-  ['🖼 Check last screenshot'],
+  ['🖥 Select notification', '🗒 Check selection'],
+  ['🖼 Check screenshot'],
 ])
   .oneTime()
   .resize()
@@ -25,18 +25,17 @@ export const setupStartKeyboardHandlers = (
   bot: Telegraf<Context>,
   rules: RuleMap,
   db: Lowdb.LowdbAsync<DBSchema>,
-  selectSourceMiddleware: MenuMiddleware<Context>,
-  selectScreenshotMiddleware: MenuMiddleware<Context>
+  middlewares: ReadonlyMap<string, MenuMiddleware<Context>>
 ) => {
   bot.hears('🖥 Select notification', (context: Context) => {
-    selectSourceMiddleware.replyToContext(context);
+    middlewares.get('select-notification').replyToContext(context);
   });
 
-  bot.hears('🖼 Check last screenshot', (context: Context) => {
-    selectScreenshotMiddleware.replyToContext(context);
+  bot.hears('🖼 Check screenshot', (context: Context) => {
+    middlewares.get('select-screenshot').replyToContext(context);
   });
 
-  bot.hears('🗒 Check current selection', async (context: Context) => {
+  bot.hears('🗒 Check selection', async (context: Context) => {
     const currentUser = context.from.id;
     const userRecord = await db.get('users').find({ id: currentUser }).value();
     if (userRecord) {

@@ -1,14 +1,17 @@
 import path from 'path';
 
+import Bottleneck from 'bottleneck';
 import config from 'config';
 import Lowdb from 'lowdb';
 import { Context, Telegraf } from 'telegraf';
+import { MenuMiddleware } from 'telegraf-inline-menu/dist/source';
 import LocalSession from 'telegraf-session-local';
+import { TelegrafContext } from 'telegraf/typings/context';
 
 import { DBSchema } from '../db';
 import { RuleMap } from '../rules/Rule';
 
-import { start } from './commands';
+import { start, status } from './commands';
 import { setupStartKeyboardHandlers } from './keyboard';
 import { setupSelectScreenshotMenu, setupSelectSourceMenu } from './menu';
 
@@ -24,7 +27,11 @@ export type ContextWithSession = Context & {
  * @param rules The rule map loaded from files
  * @param db Lowdb database
  */
-export const setupBot = (rules: RuleMap, db: Lowdb.LowdbAsync<DBSchema>) => {
+export const setupBot = (
+  rules: RuleMap,
+  db: Lowdb.LowdbAsync<DBSchema>,
+  limiters: ReadonlyMap<string, Bottleneck>
+) => {
   bot.use(
     new LocalSession({
       database: path.join(
@@ -34,6 +41,7 @@ export const setupBot = (rules: RuleMap, db: Lowdb.LowdbAsync<DBSchema>) => {
     }).middleware()
   );
   bot.command('start', start(db));
+  bot.command('status', status(db, rules, limiters));
 
   const selectSourceMiddleware = setupSelectSourceMenu(db, rules);
   bot.use(selectSourceMiddleware.middleware());
@@ -41,11 +49,10 @@ export const setupBot = (rules: RuleMap, db: Lowdb.LowdbAsync<DBSchema>) => {
   const selectScreenshotMiddleware = setupSelectScreenshotMenu(rules);
   bot.use(selectScreenshotMiddleware.middleware());
 
-  setupStartKeyboardHandlers(
-    bot,
-    rules,
-    db,
-    selectSourceMiddleware,
-    selectScreenshotMiddleware
-  );
+  const middlewares = new Map<string, MenuMiddleware<TelegrafContext>>([
+    ['select-notification', selectSourceMiddleware],
+    ['select-screenshot', selectScreenshotMiddleware],
+  ]);
+
+  setupStartKeyboardHandlers(bot, rules, db, middlewares);
 };

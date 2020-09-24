@@ -7,6 +7,9 @@ import { checkLoop, createLimiters } from './exec';
 import { logger } from './logger';
 import { loadRules } from './rules';
 
+/**
+ * Start the bot and start fetching
+ */
 async function startBot() {
   const rules = await loadRules();
 
@@ -20,7 +23,7 @@ async function startBot() {
   const db = await getDb();
 
   // Setup the bot with current rules
-  setupBot(rules, db);
+  setupBot(rules, db, limiters);
 
   // Launch the bot
   bot.launch();

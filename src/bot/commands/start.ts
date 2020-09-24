@@ -10,26 +10,26 @@ import { startKeyboard } from '../keyboard';
  * @param db Lowdb database
  */
 export const start = (db: Lowdb.LowdbAsync<DBSchema>) => async (
-  ctx: Context
+  context: Context
 ) => {
-  const currentUser = ctx.from.id;
+  const currentUser = context.from.id;
 
   const userRecord = await db.get('users').find({ id: currentUser }).value();
   if (!userRecord) {
     await db.get('users').push({ id: currentUser, notify: [] }).write();
-    await ctx.reply(
+    await context.reply(
       'Welcome to website watcher bot, if you are using this for scalping, FUCK YOU 🖕'
     );
-    await ctx.reply(
+    await context.reply(
       `Just wait for the in stock information here, I am checking the store every ${config.get(
         'refresh.interval'
       )} seconds.`
     );
-    await ctx.reply(
+    await context.reply(
       'As a new user, please select the notification you want to receive',
       startKeyboard
     );
   } else {
-    await ctx.reply('You are an active user already.', startKeyboard);
+    await context.reply('You are an active user already.', startKeyboard);
   }
 };

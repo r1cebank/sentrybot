@@ -38,17 +38,19 @@ export const setupSelectScreenshotMenu = (rules: RuleMap) => {
       do: async (context: ContextWithSession, key) => {
         try {
           await fsPromises.stat(
-            path.join(config.get('image.path'), `${key}.png`)
+            path.join(config.get('images.path'), `${key}.png`)
           );
           await context.reply('Here is the last screenshot photo:');
           await context.replyWithPhoto({
             source: fs.createReadStream(
-              path.join(config.get('image.path'), `${key}.png`)
+              path.join(config.get('images.path'), `${key}.png`)
             ),
           });
         } catch (error) {
           await context.reply(
-            `Selected source: ${rules[key].name} has no last check screenshot`
+            `Selected source: ${
+              rules.get(key).name
+            } has no last check screenshot`
           );
         }
         return true;

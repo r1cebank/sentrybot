@@ -20,6 +20,11 @@ export type WebExecuteResult = {
   readonly error?: Error;
 };
 
+export type RunResults = {
+  readonly triggered: boolean;
+  readonly runStatus: string;
+};
+
 export type ExecuteResult = WebExecuteResult;
 
 /**
