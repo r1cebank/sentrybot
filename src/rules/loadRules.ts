@@ -7,6 +7,10 @@ import { logger } from '../logger';
 
 import { Rule } from './';
 
+/**
+ * Load all .yaml rules in directory
+ * @param rulesDir The rules directory
+ */
 export const loadRules = async (rulesDir = 'rules') => {
   const files = await (await fs.readdir(rulesDir)).filter(
     (filename) => path.extname(filename) === '.yaml'

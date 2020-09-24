@@ -17,6 +17,9 @@ const adapter = new FileAsync<DBSchema>(
   path.join(config.get('db.path'), config.get('db.file'))
 );
 
+/**
+ * Get the lowdb database instance
+ */
 export const getDb = async () => {
   const db = await Lowdb(adapter);
   await db

@@ -3,10 +3,15 @@ import config from 'config';
 
 import { RuleMap } from '../rules';
 
-export type Limiters = ReadonlyMap<string, Bottleneck>;
 export type EnabledRulesMap = ReadonlyMap<string, boolean>;
 
-export const createLimiters = (rules: RuleMap): Limiters => {
+/**
+ * Create a map of limiters for the rules loaded
+ * @param rules The rules map from loaded rules
+ */
+export const createLimiters = (
+  rules: RuleMap
+): ReadonlyMap<string, Bottleneck> => {
   const ruleKeys = Array.from(rules.keys());
   const limiterMap = new Map<string, Bottleneck>();
   ruleKeys.forEach((k) => {

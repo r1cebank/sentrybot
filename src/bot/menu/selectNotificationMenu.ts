@@ -10,6 +10,11 @@ export const selectSourceMenu = new MenuTemplate(
   'Please select a notification source to receive from.'
 );
 
+/**
+ * Setup the select notification menu using rules loaded
+ * @param db Lowdb database
+ * @param rules Rule map loaded from files
+ */
 export const setupSelectSourceMenu = (
   db: Lowdb.LowdbAsync<DBSchema>,
   rules: RuleMap
@@ -33,7 +38,7 @@ export const setupSelectSourceMenu = (
       set: async (context: Context, key) => {
         const currentUser = context.from.id;
         const user = await db.get('users').find({ id: currentUser }).value();
-        const rule = rules[key];
+        const rule = rules.get(key);
         if (rule) {
           if (user) {
             if (user.notify && !user.notify.includes(key)) {

@@ -5,6 +5,10 @@ import { Context } from 'telegraf';
 import { DBSchema } from '../../db';
 import { startKeyboard } from '../keyboard';
 
+/**
+ * Return the start command handler
+ * @param db Lowdb database
+ */
 export const start = (db: Lowdb.LowdbAsync<DBSchema>) => async (
   ctx: Context
 ) => {

@@ -1,11 +1,14 @@
 export type SelectorRule = {
-  readonly _type: 'selector';
+  readonly type: 'selector';
   readonly selector: string;
   readonly condition: Condition;
 };
 
 export enum ConditionType {
+  EXISTS = 'exists',
   EQUAL = 'equal',
+  INCLUDES = 'includes',
+  NOT_INCLUDES = 'not_includes',
   NOT_EQUAL = 'not_equal',
 }
 
@@ -15,9 +18,10 @@ export type Condition = {
 };
 
 export type WebsiteRule = {
-  readonly _type: 'website';
+  readonly type: 'website';
   readonly name: string;
   readonly id: string;
+  readonly url: string;
   readonly validateFor: readonly SelectorRule[];
   readonly notifyFor: readonly SelectorRule[];
 };
