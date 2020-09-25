@@ -27,6 +27,7 @@
   ],
   "flagWords": [],
   "ignorePaths": [
+    "*.yaml",
     "package.json",
     "package-lock.json",
     "yarn.lock",

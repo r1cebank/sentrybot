@@ -1,0 +1,15 @@
+name: EVGA 3080XC3 (Canada Computers)
+id: evga_3080_xc3_cancomp
+type: website
+url: https://www.canadacomputers.com/product_info.php?cPath=43_557_559&item_id=181375
+validateFor:
+  - type: selector
+    selector: '#storeinfo'
+    condition:
+      condition: exists
+notifyFor:
+  - type: selector
+    selector: ".stocklevel-pop .row:contains('Online Store') .item-stock:first"
+    condition:
+      condition: not_equal
+      value: '-'

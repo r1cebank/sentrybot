@@ -106,12 +106,17 @@ export const checkLoop = (
             })
           );
         }
+        if (checkResults.error) {
+          logger.error(checkResults.error.message, checkResults.error);
+        }
       } catch (error: unknown) {
         if (error instanceof Bottleneck.BottleneckError) {
           logger.error(
             `Message is dropped by the limiter: ${ruleId}`,
             <Bottleneck.BottleneckError>error
           );
+        } else {
+          logger.error((<Error>error).message, error);
         }
       }
     })

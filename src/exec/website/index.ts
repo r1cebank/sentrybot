@@ -60,7 +60,6 @@ export const executeWebsite = async (rule: Rule): Promise<WebExecuteResult> => {
                 id,
                 name,
                 triggered: false,
-                triggeredValue: '',
                 error: new Error(
                   `Wait selector failed for ${name}, selector: ${selector}, expected ${condition.value}`
                 ),
@@ -73,7 +72,6 @@ export const executeWebsite = async (rule: Rule): Promise<WebExecuteResult> => {
                 id,
                 name,
                 triggered: false,
-                triggeredValue: '',
                 error: new Error(
                   `Wait selector failed for ${name}, selector: ${selector}, expected not ${condition.value}`
                 ),
@@ -81,10 +79,13 @@ export const executeWebsite = async (rule: Rule): Promise<WebExecuteResult> => {
             }
           }
         }
-        return Promise.resolve();
+        return {
+          name,
+          id,
+          triggered: false,
+        };
       })
     );
-
     // Take screenshot
     await page.screenshot({
       path: path.join(config.get('images.path'), `${id}.png`),

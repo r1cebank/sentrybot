@@ -1,0 +1,15 @@
+name: EVGA 3080XC3 (Newegg CA)
+id: evga_3080_xc3_newegg_ca
+type: website
+url: https://www.newegg.ca/evga-geforce-rtx-3080-10g-p5-3881-kr/p/N82E16814487522?Description=3080&cm_re=3080-_-14-487-522-_-Product
+validateFor:
+  - type: selector
+    selector: '#continueReal'
+    condition:
+      condition: exists
+notifyFor:
+  - type: selector
+    selector: '#landingpage-cart .btn'
+    condition:
+      condition: includes
+      value: CART

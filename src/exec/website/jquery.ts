@@ -72,7 +72,9 @@ export const waitForElement = async (
         if (elementCount) {
           resolve();
         } else {
-          reject();
+          reject(
+            new Error(`Element ${selector} didn't appear in ${timeout}ms`)
+          );
         }
       }, timeout);
     }
