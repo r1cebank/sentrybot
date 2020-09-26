@@ -4,6 +4,7 @@ import Lowdb from 'lowdb';
 import { DBSchema } from '../../db';
 import { getEnabledRulesMap } from '../../exec';
 import { RuleMap } from '../../rules';
+import { Singleton } from '../../singleton';
 
 /**
  * The /status command handler
@@ -34,9 +35,9 @@ export const status = (
       await context.reply(
         `Job: ${id}\nEnabled: ${
           enabledRulesMap.get(id) ? 'active' : 'inactive'
-        }\nQueued: ${limiterStat.QUEUED || 0}\nRunning: ${
-          limiterStat.RUNNING || 0
-        }\nDone: ${limiterStat.DONE || 0}`
+        }\nTriggered: ${Singleton.getTriggerStatus(id)}\nQueued: ${
+          limiterStat.QUEUED || 0
+        }\nRunning: ${limiterStat.RUNNING || 0}\nDone: ${limiterStat.DONE || 0}`
       );
     })
   );

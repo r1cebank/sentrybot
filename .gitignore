@@ -9,3 +9,4 @@ coverage
 yarn.lock
 .envrc
 *.json
+images

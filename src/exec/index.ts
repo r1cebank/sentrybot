@@ -7,6 +7,7 @@ import Telegraf, { Context } from 'telegraf';
 import { DBSchema } from '../db';
 import { logger } from '../logger';
 import { Rule, RuleMap } from '../rules';
+import { Singleton } from '../singleton';
 
 import { executeWebsite } from './website';
 
@@ -86,7 +87,8 @@ export const checkLoop = (
       try {
         const checkResults = await limiter.schedule(() => checkRule(rule));
         // Rule is triggered
-        if (checkResults.triggered) {
+        if (checkResults.triggered && !Singleton.getTriggerStatus(ruleId)) {
+          Singleton.setTriggerStatus(ruleId, true);
           const users = await db.get('users').value();
           await Promise.all(
             users.map(async (user) => {
@@ -106,13 +108,17 @@ export const checkLoop = (
             })
           );
         }
+        if (!checkResults.triggered) {
+          logger.info(`Resetting triggered status for ${ruleId}`);
+          Singleton.setTriggerStatus(ruleId, false);
+        }
         if (checkResults.error) {
           logger.error(checkResults.error.message, checkResults.error);
         }
       } catch (error: unknown) {
         if (error instanceof Bottleneck.BottleneckError) {
           logger.error(
-            `Message is dropped by the limiter: ${ruleId}`,
+            `Job is dropped by the limiter: ${ruleId}`,
             <Bottleneck.BottleneckError>error
           );
         } else {

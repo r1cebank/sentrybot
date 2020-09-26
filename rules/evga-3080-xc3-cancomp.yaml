@@ -13,3 +13,8 @@ notifyFor:
     condition:
       condition: not_equal
       value: '-'
+  - type: selector
+    selector: ".stocklevel-pop .row:contains('Burnaby') .item-stock:first"
+    condition:
+      condition: not_equal
+      value: '-'
