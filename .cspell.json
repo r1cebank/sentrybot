@@ -20,7 +20,9 @@
     "middlewares",
     "pino",
     "prettierignore",
+    "cebank",
     "sandboxed",
+    "sentrybot",
     "transpiled",
     "typedoc",
     "untracked"

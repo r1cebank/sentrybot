@@ -108,7 +108,11 @@ export const checkLoop = (
             })
           );
         }
-        if (!checkResults.triggered) {
+        if (
+          !checkResults.triggered &&
+          !checkResults.error &&
+          Singleton.getTriggerStatus(ruleId)
+        ) {
           logger.info(`Resetting triggered status for ${ruleId}`);
           Singleton.setTriggerStatus(ruleId, false);
         }
