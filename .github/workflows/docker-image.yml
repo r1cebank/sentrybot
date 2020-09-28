@@ -28,7 +28,9 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/386,linux/arm
           push: true
           tag_with_ref: true,
-          tags: r1cebank/sentrybot:latest
+          tags: |
+            r1cebank/sentrybot:latest
+            r1cebank/sentrybot:${GITHUB_SHA::8}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
