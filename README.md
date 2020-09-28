@@ -1,5 +1,8 @@
 # sentrybot
 
+![Docker build and publish](https://github.com/r1cebank/sentrybot/workflows/Docker%20build%20and%20publish/badge.svg)
+![Docker Pulls](https://img.shields.io/docker/pulls/r1cebank/sentrybot)
+
 A Telegram bot to watch website changes
 
 Easy to config with yaml rules and support website and api change monitoring.
