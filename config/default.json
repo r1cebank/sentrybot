@@ -1,0 +1,20 @@
+{
+  "telegram": {
+    "token": ""
+  },
+  "db": {
+    "path": "./",
+    "file": "db.json"
+  },
+  "session": {
+    "path": "./",
+    "file": "session.json"
+  },
+  "refresh": {
+    "interval": "5"
+  },
+  "images": {
+    "path": "images"
+  },
+  "logLevel": "debug"
+}

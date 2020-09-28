@@ -1,0 +1,20 @@
+{
+  "telegram": {
+    "token": "TELEGRAM_BOT_TOKEN"
+  },
+  "db": {
+    "path": "LOCAL_DB_PATH",
+    "file": "LOCAL_DB_FILE"
+  },
+  "session": {
+    "path": "LOCAL_SESSION_PATH",
+    "file": "LOCAL_SESSION_FILE"
+  },
+  "refresh": {
+    "interval": "REFRESH_INTERVAL"
+  },
+  "image": {
+    "path": "IMAGE_PATH"
+  },
+  "logLevel": "LOG_LEVEL"
+}
