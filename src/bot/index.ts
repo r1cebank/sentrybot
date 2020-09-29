@@ -14,6 +14,7 @@ import { RuleMap } from '../rules/Rule';
 import { start, status } from './commands';
 import { setupStartKeyboardHandlers } from './keyboard';
 import { setupSelectScreenshotMenu, setupSelectSourceMenu } from './menu';
+import { authMiddleware } from './middleware';
 
 export const bot = new Telegraf(config.get('telegram.token'));
 
@@ -32,6 +33,9 @@ export const setupBot = (
   db: Lowdb.LowdbAsync<DBSchema>,
   limiters: ReadonlyMap<string, Bottleneck>
 ) => {
+  // Setup middleware
+  bot.use(authMiddleware);
+
   bot.use(
     new LocalSession({
       database: path.join(

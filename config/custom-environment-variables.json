@@ -1,6 +1,7 @@
 {
   "telegram": {
-    "token": "TELEGRAM_BOT_TOKEN"
+    "token": "TELEGRAM_BOT_TOKEN",
+    "whitelist": "TELEGRAM_USER_WHITELIST"
   },
   "db": {
     "path": "LOCAL_DB_PATH",

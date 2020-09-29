@@ -1,6 +1,7 @@
 {
   "telegram": {
-    "token": ""
+    "token": "",
+    "whitelist": ""
   },
   "db": {
     "path": "./",
