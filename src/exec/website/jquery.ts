@@ -64,13 +64,13 @@ export const waitForElement = async (
 
   return new Promise((resolve, reject) => {
     if (elementCount) {
-      resolve();
+      resolve(null);
     } else {
       setTimeout(async () => {
         const elementCount = await getElementCount(page, selector);
 
         if (elementCount) {
-          resolve();
+          resolve(null);
         } else {
           reject(
             new Error(`Element ${selector} didn't appear in ${timeout}ms`)
