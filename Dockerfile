@@ -60,4 +60,4 @@ USER pptruser
 VOLUME [ "/data" ]
 
 ENTRYPOINT ["dumb-init", "--"]
-CMD ["node", "--inspect=0.0.0.0", "index.js"]
+CMD ["node", "index.js"]
